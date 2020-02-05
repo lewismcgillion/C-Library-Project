@@ -1,5 +1,10 @@
 ﻿  Book.cpp
   Library.cpp
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(10,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(19,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(83,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(131,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(139,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Student.cpp
   Generating Code...
   Library.vcxproj -> C:\Users\lewis\source\repos\Library\Debug\Library.exe

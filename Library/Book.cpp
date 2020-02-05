@@ -7,6 +7,12 @@ Book::Book(int num, std::string name, std::string author) {
 	authorName = author;
 }
 
+Book::Book() {
+	bookNumber = 0;
+	bookName = "";
+	authorName = "";
+}
+
 bool Book::getOnLoan() {
 	return onLoan;
 }

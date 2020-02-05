@@ -7,6 +7,10 @@ Student::Student(int ID, std::string fName, std::string lName){
 	lastName = lName;
 }
 
+Student::Student() {
+
+}
+
 Student::~Student() {
 	std::cout << "Student record deleted.\n";
 }

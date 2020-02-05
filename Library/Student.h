@@ -11,6 +11,7 @@ private:
 	Book* loanedBook;
 public:
 	Student(int ID, std::string fName, std::string lName);
+	Student();
 	~Student();
 	void loanBook(Book* book);
 	void returnBook();
