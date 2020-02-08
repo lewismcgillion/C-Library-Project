@@ -28,9 +28,14 @@ void Student::loanBook(Book* book)
 }
 
 void Student::returnBook() {
-	loanedBook->setOnLoan(false);
-	bookLoaned = false;
-	loanedBook = nullptr;
+	if (bookLoaned != false) {
+		loanedBook->setOnLoan(false);
+		bookLoaned = false;
+		loanedBook = nullptr;
+	}
+	else {
+		std::cout << "Student does not have a book on loan.\n\n";
+	}
 }
 
 void Student::showLoanDetails() {

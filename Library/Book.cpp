@@ -22,7 +22,7 @@ void Book::setOnLoan(bool flag) {
 }
 
 void Book::showDetails() {
-	std::cout << "Book number : " << bookNumber << "\nBook name : " << bookName << "\nAuthor name : " << authorName;
+	std::cout << "Book number : " << bookNumber << "\nBook name : " << bookName << "\nAuthor name : " << authorName << std::endl;
 }
 
 std::string Book::getbookName() {
