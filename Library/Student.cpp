@@ -7,8 +7,12 @@ Student::Student(int ID, std::string fName, std::string lName){
 	lastName = lName;
 }
 
-Student::Student() {
-
+Student::Student(int ID, std::string fName, std::string lName, bool bLoaned, std::string loanedBName) {
+	studentID = ID;
+	firstName = fName;
+	lastName = lName;
+	bookLoaned = bLoaned;
+	loanedBookName = loanedBName;
 }
 
 Student::~Student() {
@@ -18,7 +22,7 @@ Student::~Student() {
 void Student::loanBook(Book* book)
 {
 	if (bookLoaned == false && book->getOnLoan() == false) {
-		loanedBook = book;
+		loanedBookName = book->getbookName;
 		bookLoaned = true;
 		book->setOnLoan(true);
 	}

@@ -1,10 +1,11 @@
 #include "Book.h"
 #include <iostream>
 
-Book::Book(int num, std::string name, std::string author) {
+Book::Book(int num, std::string name, std::string author, bool loan) {
 	bookNumber = num;
 	bookName = name;
 	authorName = author;
+	onLoan = loan;
 }
 
 Book::Book() {

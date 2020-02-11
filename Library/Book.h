@@ -8,10 +8,11 @@ private:
 	std::string authorName;
 	bool onLoan = false;
 public:
+	Book(int num, std::string name, std::string author, bool loan);
 	Book();
-	Book(int num,std::string name, std::string author);
 	bool getOnLoan();
 	void setOnLoan(bool flag);
 	void showDetails();
 	std::string getbookName();
+	friend void writeBookRecords(std::vector<Book*> books);
 };

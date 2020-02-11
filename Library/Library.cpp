@@ -1,11 +1,104 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <vector>
 #include <exception>
 #include "Book.h"
 #include "Student.h"
 
+//Still a work in progress!!
+
 std::vector<Book*> books;
 std::vector<Student*> students;
+
+std::vector<Student*> readStudentRecords() {
+    std::vector<Student*> students;
+    std::fstream fIn;
+    fIn.open("BookRecords.csv", std::ios::in);
+
+    std::vector<std::string> row;
+    std::string line, token, temp;
+
+    while (fIn >> temp) {
+        row.clear();
+
+        getline(fIn, line);
+        std::istringstream ss(line);
+
+        while (getline(ss, token, ',')) {
+            row.push_back(token);
+        }
+        int stuID = stoi(row[0]);
+        std::string stuFName = row[1];
+        std::string stuLName = row[2];
+        bool bookLoaned;
+        if (row[3] == "1") { bookLoaned = true; }
+        else { bookLoaned = false; };
+        std::string loanedBookName = row[4];
+
+        students.push_back(new Student(stuID, stuFName, stuLName, bookLoaned, loanedBookName));
+    }
+
+    return students;
+}
+
+std::vector<Book*> readBookRecords() {
+    std::vector<Book*> books;
+    std::fstream fIn;
+    fIn.open("BookRecords.csv", std::ios::in);
+
+    std::vector<std::string> row;
+    std::string line, token, temp;
+
+    while (fIn >> temp) {
+        row.clear();
+
+        getline(fIn, line);
+        std::istringstream ss(line);
+
+        while (getline(ss, token, ',')) {
+            row.push_back(token);
+        }
+
+        int bookNumber = stoi(row[0]);
+        std::string bookName = row[1];
+        std::string authorName = row[2];
+        bool onLoan;
+        if (row[3] == "1") { onLoan = true; }
+        else { onLoan = false; }
+
+        books.push_back(new Book(bookNumber, bookName, authorName, onLoan));
+    }
+    return books;
+}
+
+void writeStudentRecords(std::vector<Student*> students) {
+    std::fstream fOut;
+
+    fOut.open("StudentRecords.csv", std::ios::out | std::ios::app);
+
+    for (int i = 0; i < students.size(); i++) {
+        fOut << students[i]->studentID << ","
+            << students[i]->firstName << ","
+            << students[i]->lastName << ","
+            << students[i]->bookLoaned << ","
+            << students[i]->loanedBookName << "\n";
+    }
+}
+
+void writeBookRecords(std::vector<Book*> books) {
+    std::fstream fOut;
+
+    fOut.open("BookRecords.csv", std::ios::out | std::ios::app);
+
+    for (int i = 0; i < books.size(); i++) {
+        fOut << books[i]->bookNumber << ","
+            << books[i]->bookName << ","
+            << books[i]->authorName << ","
+            << books[i]->onLoan << "\n";
+    }
+}
+
 
 //getBook function to query book by name and return book pointer
 Book* getBook(std::string bookName) {
@@ -28,15 +121,12 @@ Student* getStudent(int ID) {
 }
 
 
-struct invalidInput : public std::exception {
-    const char* what() const throw() {
-        return "Invalid input.\n";
-    }
-};
-
-
 int main()
 {
+    std::fstream fout;
+    fout.open("StudentRecords.csv", std::ios::out | std::ios::app);
+
+
     //userChoice variable to get input from the user
     std::string userChoice;
     while (userChoice != "0") {
@@ -131,7 +221,7 @@ int main()
                 std::cout << "Please enter the name of the author\n";
                 std::cin >> authName;
 
-                books.push_back(new Book(bookIDNum, bookName, authName));
+                books.push_back(new Book(bookIDNum, bookName, authName, false));
             }
             else if (userChoiceBooks == "2") {
                 std::string bookName;
