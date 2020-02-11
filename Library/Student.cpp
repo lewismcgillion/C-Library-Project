@@ -1,28 +1,36 @@
 #include "Student.h"
 #include <iostream>
 
+//student constructor, takes three parameters and sets bookloaned and loanedbookname to default values
 Student::Student(int ID, std::string fName, std::string lName){
 	studentID = ID;
 	firstName = fName;
 	lastName = lName;
+	bookLoaned = false;
+	loanedBook = NULL;
 }
 
-Student::Student(int ID, std::string fName, std::string lName, bool bLoaned, std::string loanedBName) {
+//student constructor, takes parameters for all member variabes and sets them accordingly
+Student::Student(int ID, std::string fName, std::string lName, bool bLoaned, Book* loanedB) {
 	studentID = ID;
 	firstName = fName;
 	lastName = lName;
 	bookLoaned = bLoaned;
-	loanedBookName = loanedBName;
+	loanedBook = loanedB;
 }
 
+//students destructor
 Student::~Student() {
 	std::cout << "Student record deleted.\n";
 }
 
+//loanBook function
 void Student::loanBook(Book* book)
 {
+	//Checking to see whether the student currently has a book on loan or whether the book is already loaned
 	if (bookLoaned == false && book->getOnLoan() == false) {
-		loanedBookName = book->getbookName;
+		//setting variables for the student and the book
+		loanedBook = book;
 		bookLoaned = true;
 		book->setOnLoan(true);
 	}
@@ -31,8 +39,11 @@ void Student::loanBook(Book* book)
 	}
 }
 
+//returnBook function
 void Student::returnBook() {
+	//If the student has a book on loan
 	if (bookLoaned != false) {
+		//setting the variables for the student and the book
 		loanedBook->setOnLoan(false);
 		bookLoaned = false;
 		loanedBook = nullptr;
@@ -42,8 +53,12 @@ void Student::returnBook() {
 	}
 }
 
+
+//displaying the loan details
 void Student::showLoanDetails() {
+	//if the student has a book on loan
 	if (bookLoaned) {
+		//calling the showDetails function for the loaned book
 		loanedBook->showDetails();
 	}
 	else {
@@ -51,6 +66,7 @@ void Student::showLoanDetails() {
 	}
 }
 
+//student ID getter
 int Student::getStuID() {
 	return studentID;
 }

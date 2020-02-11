@@ -9,10 +9,10 @@ private:
 	std::string firstName;
 	std::string lastName;
 	bool bookLoaned;
-	std::string loanedBookName;
+	Book* loanedBook;
 public:
 	Student(int ID, std::string fName, std::string lName);
-	Student(int ID, std::string fName, std::string lName, bool bLoaned, std::string loanedBName);
+	Student(int ID, std::string fName, std::string lName, bool bLoaned, Book* loanedB);
 	~Student();
 	void loanBook(Book* book);
 	void returnBook();
