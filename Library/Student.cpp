@@ -6,8 +6,6 @@ Student::Student(int ID, std::string fName, std::string lName){
 	studentID = ID;
 	firstName = fName;
 	lastName = lName;
-	bookLoaned = false;
-	loanedBook = NULL;
 }
 
 //student constructor, takes parameters for all member variabes and sets them accordingly

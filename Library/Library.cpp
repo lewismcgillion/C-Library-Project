@@ -1,16 +1,13 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include <exception>
 #include "Book.h"
 #include "Student.h"
 
 //Still a work in progress!!
-
-//global variables for the books and students vectors
-std::vector<Book*> books;
-std::vector<Student*> students;
 
 //function declarations
 std::vector<Student*> readStudentRecords();
@@ -19,6 +16,10 @@ void writeStudentRecords(std::vector<Student*> students);
 void writeBookRecords(std::vector<Book*> books);
 Book* getBook(std::string bookName);
 Student* getStudent(int ID);
+
+//global variables for the books and students vectors
+std::vector<Book*> books = readBookRecords();
+std::vector<Student*> students = readStudentRecords();
 
 int main()
 {
@@ -32,6 +33,7 @@ int main()
             << "[2] Return a book\n"
             << "[3] Modify the details of books\n"
             << "[4] Modify the details of students\n"
+            << "[5] Write book and student records to file\n"
             << "[0] Exit\n";
         std::cin >> userChoice;
 
@@ -226,10 +228,13 @@ int main()
                 delete stu;
             }
         }
-        else {
+        else if (userChoice == "5") {
+            writeStudentRecords(students);
+            writeBookRecords(books);
+        }
+        else if(userChoice != "0") {
             std::cout << "\nPlease enter a valid response.\n\n";
         }
-        userChoice = "";
     }
 }
 
@@ -240,22 +245,21 @@ std::vector<Student*> readStudentRecords() {
     std::fstream fIn;
 
     //opening the csv file
-    fIn.open("BookRecords.csv", std::ios::in);
+    fIn.open("StudentRecords.csv", std::ios::in);
 
     std::vector<std::string> row;
     std::string line, token, temp;
-
+    
     //while there are still lines to read
     while (fIn >> temp) {
-        //clear the previous row
+        //Clearing the previous row
         row.clear();
-
-        //get a line from the file and put it in a stringstream
         getline(fIn, line);
-        std::stringstream ss(line);
 
-        //splitting each line by commas
-        while (getline(ss, token, ',')) {
+        //Creating a stringstream from the temp input
+        std::stringstream ss(temp);
+
+        while (std::getline(ss, token, ',')) {
             row.push_back(token);
         }
 
@@ -273,10 +277,11 @@ std::vector<Student*> readStudentRecords() {
         //setting the name of the loaned book, if there is one
         Book* loanedBook = getBook(row[4]);
 
+
+        std::cout << row[0] << std::endl << row[1] << std::endl << row[2] << std::endl << row[3] << std::endl << row[4] << std::endl << std::endl;
         //adding the student to the vector of students
         students.push_back(new Student(stuID, stuFName, stuLName, bookLoaned, loanedBook));
     }
-
     //returning the vector
     return students;
 }
@@ -291,18 +296,16 @@ std::vector<Book*> readBookRecords() {
     fIn.open("BookRecords.csv", std::ios::in);
 
     std::vector<std::string> row;
-    std::string line, token, temp;
+    std::string line,token, temp;
 
     //while there are lines to read
     while (fIn >> temp) {
-        //clear the previous row
+        //clearing the previous row
         row.clear();
-
-        //get a line from the file
         getline(fIn, line);
 
-        //converting the line to a stringstream
-        std::stringstream ss(line);
+        //creating a stringstream from the temp input
+        std::stringstream ss(temp);
 
         //splitting the line by commas
         while (getline(ss, token, ',')) {
@@ -332,15 +335,20 @@ void writeStudentRecords(std::vector<Student*> students) {
     std::fstream fOut;
 
     //opening the csv file to be written to
-    fOut.open("StudentRecords.csv", std::ios::out | std::ios::app);
+    fOut.open("StudentRecords.csv", std::ios::out | std::ios::trunc);
 
     //writing each member variable to the csv file, split by commas
     for (int i = 0; i < students.size(); i++) {
+        std::string bookName = "NoBook";
+        if (students[i]->loanedBook != NULL) {
+            bookName = students[i]->loanedBook->getbookName();
+        }
+
         fOut << students[i]->studentID << ","
             << students[i]->firstName << ","
             << students[i]->lastName << ","
             << students[i]->bookLoaned << ","
-            << students[i]->loanedBook->getbookName() << "\n";
+            << bookName << "\n";
     }
 }
 
@@ -349,7 +357,7 @@ void writeBookRecords(std::vector<Book*> books) {
     std::fstream fOut;
 
     //opening the csv file to be written to
-    fOut.open("BookRecords.csv", std::ios::out | std::ios::app);
+    fOut.open("BookRecords.csv", std::ios::out | std::ios::trunc);
 
     //writing each member variable to the csv file, split by commas
     for (int i = 0; i < books.size(); i++) {
