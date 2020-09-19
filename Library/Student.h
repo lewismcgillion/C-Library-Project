@@ -16,6 +16,7 @@ public:
 	~Student();
 	void loanBook(Book* book);
 	void returnBook();
+	void showStudentDetails();
 	void showLoanDetails();
 	int getStuID();
 	friend void writeStudentRecords(std::vector<Student*> students);

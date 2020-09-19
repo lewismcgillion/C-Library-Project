@@ -1,0 +1,4 @@
+﻿  Library.cpp
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(139,38): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(173,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Library.vcxproj -> C:\Users\lewis\source\repos\Library\x64\Debug\Library.exe

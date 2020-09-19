@@ -1,7 +1,7 @@
 ﻿  Library.cpp
-C:\Users\lewis\source\repos\Library\Library\Library.cpp(143,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\lewis\source\repos\Library\Library\Library.cpp(202,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\lewis\source\repos\Library\Library\Library.cpp(220,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(142,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(201,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\lewis\source\repos\Library\Library\Library.cpp(219,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\lewis\source\repos\Library\Library\Library.cpp(340,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\lewis\source\repos\Library\Library\Library.cpp(362,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\lewis\source\repos\Library\Library\Library.cpp(374,23): warning C4018: '<': signed/unsigned mismatch

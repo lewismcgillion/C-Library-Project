@@ -51,6 +51,17 @@ void Student::returnBook() {
 	}
 }
 
+void Student::showStudentDetails() {
+	//outputting details of the student
+	std::cout << "\tStudent ID = " << studentID << "\n\tFirst Name = " << firstName << "\n\tLast Name = " << lastName << "\n\tBook Loaned? = ";
+	if (bookLoaned) {
+		std::cout << "Yes\n";
+		std::cout << "Book name = " << loanedBook->getbookName();
+	}
+	else {
+		std::cout << "No\n\n";
+	}
+}
 
 //displaying the loan details
 void Student::showLoanDetails() {

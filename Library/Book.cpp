@@ -29,7 +29,8 @@ void Book::setOnLoan(bool flag) {
 
 //function to show the details of the book
 void Book::showDetails() {
-	std::cout << "Book number : " << bookNumber << "\nBook name : " << bookName << "\nAuthor name : " << authorName << std::endl;
+	//outputting details of the book
+	std::cout << "\tBook number : " << bookNumber << "\n\tBook name : " << bookName << "\n\tAuthor name : " << authorName << "\n\n";
 }
 
 //book name getter
